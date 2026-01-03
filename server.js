@@ -83,6 +83,11 @@ wss.on('connection', (ws, req, url) => {
 	ws._meta = { pathname, role, id };
 	ws.isAlive = true;
 	ws.on('pong', () => (ws.isAlive = true));
+	console.log(`[WS CONNECT] path=${pathname} role=${role} id=${id} ip=${req.socket.remoteAddress}`);
+
+	ws.on('close', (code, reason) => {
+  		console.log(`[WS CLOSE]   path=${pathname} role=${role} id=${id} code=${code} reason=${reason?.toString?.() || ''}`);
+	});
 
 	// -----------------------
 	// /control (ESP32 servos)
