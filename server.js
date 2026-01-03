@@ -169,6 +169,8 @@ wss.on('connection', (ws, req, url) => {
 			const msgStr = buf.toString('utf8');
 			const msg = safeJsonParse(msgStr);
 			if (!msg) return;
+			
+			console.log(`[SIGNAL RX] role=${role} id=${id} type=${msg.type}`);
 
 			// Expected signaling messages:
 			// { type: "offer", sdp: "..." }
